@@ -19,7 +19,7 @@ namespace ratgdo {
             this->tx_pin_ = tx_pin;
             this->rx_pin_ = rx_pin;
 
-            const int BAUD_RATE = 1100;
+            const int BAUD_RATE = 1200;
             ESP_LOGD(TAG, "Setting up secplus1 protocol: %d baud", BAUD_RATE);
             this->sw_serial_.begin(BAUD_RATE, SWSERIAL_8E1, rx_pin->get_pin(), tx_pin->get_pin(), true);
 
@@ -439,6 +439,7 @@ namespace ratgdo {
         void Secplus1::transmit_byte(uint32_t value)
         {
             bool enable_rx = (value == 0x38) || (value == 0x39) || (value == 0x3A);
+            enable_rx = false;
             if (!enable_rx) {
                 this->sw_serial_.enableIntTx(false);
             }
