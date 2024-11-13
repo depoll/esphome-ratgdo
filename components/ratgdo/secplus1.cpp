@@ -28,15 +28,14 @@ namespace ratgdo {
 
         void Secplus1::loop()
         {
-            delay(100);
             auto rx_cmd = this->read_command();
             if (rx_cmd) {
                 this->handle_command(rx_cmd.value());
             }
             auto tx_cmd = this->pending_tx();
             if (
-                (millis() - this->last_tx_) > 200 && // don't send twice in a period
-                (millis() - this->last_rx_) > 50 && // time to send it
+                (millis() - this->last_tx_) > 1000 && // don't send twice in a period
+                (millis() - this->last_rx_) > 1000 && // time to send it
                 tx_cmd && // have pending command
                 !(this->is_0x37_panel_ && tx_cmd.value() == CommandType::TOGGLE_LOCK_PRESS) && this->wall_panel_emulation_state_ != WallPanelEmulationState::RUNNING) {
                 this->do_transmit_if_pending();
