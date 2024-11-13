@@ -35,7 +35,7 @@ namespace ratgdo {
 
             this->sw_serial_.begin(9600, SWSERIAL_8N1, rx_pin->get_pin(), tx_pin->get_pin(), true);
             this->sw_serial_.enableIntTx(false);
-            this->sw_serial_.enableAutoBaud(true);
+            //this->sw_serial_.enableAutoBaud(true);
 
             this->traits_.set_features(Traits::all());
         }
