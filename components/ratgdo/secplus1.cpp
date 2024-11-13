@@ -436,7 +436,7 @@ namespace ratgdo {
 
         void Secplus1::transmit_byte(uint32_t value)
         {
-            delay(100);
+            delay(1000);
             bool enable_rx = (value == 0x38) || (value == 0x39) || (value == 0x3A);
             if (!enable_rx) {
                 this->sw_serial_.enableIntTx(false);
