@@ -28,6 +28,7 @@ namespace ratgdo {
 
         void Secplus1::loop()
         {
+            delay(100);
             auto rx_cmd = this->read_command();
             if (rx_cmd) {
                 this->handle_command(rx_cmd.value());
