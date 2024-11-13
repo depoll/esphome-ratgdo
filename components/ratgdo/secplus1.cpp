@@ -6,6 +6,9 @@
 #include "esphome/core/log.h"
 #include "esphome/core/scheduler.h"
 
+#include <chrono>
+#include <thread>
+
 namespace esphome {
 namespace ratgdo {
     namespace secplus1 {
@@ -436,6 +439,7 @@ namespace ratgdo {
 
         void Secplus1::transmit_byte(uint32_t value)
         {
+            std::this_thread::sleep_for(std::chrono::milliseconds(100));
             bool enable_rx = (value == 0x38) || (value == 0x39) || (value == 0x3A);
             if (!enable_rx) {
                 this->sw_serial_.enableIntTx(false);
