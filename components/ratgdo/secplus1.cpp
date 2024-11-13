@@ -401,7 +401,7 @@ namespace ratgdo {
             if (cmd == CommandType::TOGGLE_DOOR_PRESS) {
                 this->enqueue_transmit(CommandType::TOGGLE_DOOR_RELEASE, now + 500);
             } else if (cmd == CommandType::TOGGLE_LIGHT_PRESS) {
-                this->enqueue_transmit(CommandType::TOGGLE_LIGHT_RELEASE, now + 500);
+                this->enqueue_transmit(CommandType::TOGGLE_LIGHT_RELEASE, now);
             } else if (cmd == CommandType::TOGGLE_LOCK_PRESS) {
                 this->enqueue_transmit(CommandType::TOGGLE_LOCK_RELEASE, now + 3500);
             };
