@@ -19,7 +19,7 @@ namespace ratgdo {
             this->tx_pin_ = tx_pin;
             this->rx_pin_ = rx_pin;
 
-            const int BAUD_RATE = 1200;
+            const int BAUD_RATE = 1100;
             ESP_LOGD(TAG, "Setting up secplus1 protocol: %d baud", BAUD_RATE);
             this->sw_serial_.begin(BAUD_RATE, SWSERIAL_8E1, rx_pin->get_pin(), tx_pin->get_pin(), true);
 
@@ -34,8 +34,8 @@ namespace ratgdo {
             }
             auto tx_cmd = this->pending_tx();
             if (
-                (millis() - this->last_tx_) > 400 && // don't send twice in a period
-                (millis() - this->last_rx_) > 200 && // time to send it
+                (millis() - this->last_tx_) > 200 && // don't send twice in a period
+                (millis() - this->last_rx_) > 50 && // time to send it
                 tx_cmd && // have pending command
                 !(this->is_0x37_panel_ && tx_cmd.value() == CommandType::TOGGLE_LOCK_PRESS) && this->wall_panel_emulation_state_ != WallPanelEmulationState::RUNNING) {
                 this->do_transmit_if_pending();
