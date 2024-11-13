@@ -32,8 +32,8 @@ namespace ratgdo {
             }
             auto tx_cmd = this->pending_tx();
             if (
-                (millis() - this->last_tx_) > 200 && // don't send twice in a period
-                (millis() - this->last_rx_) > 50 && // time to send it
+                (millis() - this->last_tx_) > 500 && // don't send twice in a period
+                (millis() - this->last_rx_) > 200 && // time to send it
                 tx_cmd && // have pending command
                 !(this->is_0x37_panel_ && tx_cmd.value() == CommandType::TOGGLE_LOCK_PRESS) && this->wall_panel_emulation_state_ != WallPanelEmulationState::RUNNING) {
                 this->do_transmit_if_pending();
@@ -436,7 +436,6 @@ namespace ratgdo {
 
         void Secplus1::transmit_byte(uint32_t value)
         {
-            delay(1000);
             bool enable_rx = (value == 0x38) || (value == 0x39) || (value == 0x3A);
             if (!enable_rx) {
                 this->sw_serial_.enableIntTx(false);
