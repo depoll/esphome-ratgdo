@@ -19,8 +19,8 @@ namespace ratgdo {
             this->tx_pin_ = tx_pin;
             this->rx_pin_ = rx_pin;
 
-            const int BAUD_RATE = 1100;
-            ESP_LOGD(TAG, "Setting up secplus1 protocol: %d baud", BAUD_RATE);
+            const int BAUD_RATE = 600;
+            ESP_LOGW(TAG, "Setting up secplus1 protocol: %d baud", BAUD_RATE);
             this->sw_serial_.begin(BAUD_RATE, SWSERIAL_8E1, rx_pin->get_pin(), tx_pin->get_pin(), true);
 
             this->traits_.set_features(HAS_DOOR_STATUS | HAS_LIGHT_TOGGLE | HAS_LOCK_TOGGLE);
