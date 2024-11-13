@@ -390,7 +390,7 @@ namespace ratgdo {
             auto cmd = this->pop_pending_tx();
             if (cmd) {
                 this->enqueue_command_pair(cmd.value());
-                this->transmit_byte(static_cast<uint32_t>(cmd.value()));
+                this->transmit_byte(static_cast<uint8_t>(cmd.value()));
             }
             return cmd;
         }
@@ -436,7 +436,7 @@ namespace ratgdo {
             return cmd;
         }
 
-        void Secplus1::transmit_byte(uint32_t value)
+        void Secplus1::transmit_byte(uint8_t value)
         {
             bool enable_rx = (value == 0x38) || (value == 0x39) || (value == 0x3A);
             enable_rx = false;
