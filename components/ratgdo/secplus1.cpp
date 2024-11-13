@@ -75,13 +75,13 @@ namespace ratgdo {
                     ESP_LOG1(TAG, "Wall panel detected");
                     return;
                 }
-                if (millis() - this->wall_panel_emulation_start_ > 35000 && !this->wall_panel_starting_) {
+                /*if (millis() - this->wall_panel_emulation_start_ > 35000 && !this->wall_panel_starting_) {
                     ESP_LOGD(TAG, "No wall panel detected. Switching to emulation mode.");
                     this->wall_panel_emulation_state_ = WallPanelEmulationState::RUNNING;
                 }
                 this->scheduler_->set_timeout(this->ratgdo_, "wall_panel_emulation", 2000, [=] {
                     this->wall_panel_emulation();
-                });
+                });*/
                 return;
             } else if (this->wall_panel_emulation_state_ == WallPanelEmulationState::RUNNING) {
                 // ESP_LOG2(TAG, "[Wall panel emulation] Sending byte: [%02X]", secplus1_states[index]);
