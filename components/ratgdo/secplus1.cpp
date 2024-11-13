@@ -439,12 +439,12 @@ namespace ratgdo {
         void Secplus1::transmit_byte(uint8_t value)
         {
             bool enable_rx = (value == 0x38) || (value == 0x39) || (value == 0x3A);
-            enable_rx = false;
             if (!enable_rx) {
                 this->sw_serial_.enableIntTx(false);
             }
             this->sw_serial_.write(value);
             this->last_tx_ = millis();
+            ESP_LOGW(TAG, "[%d] Sent byte: [%02X]", millis(), value);
             if (!enable_rx) {
                 this->sw_serial_.enableIntTx(true);
             }
