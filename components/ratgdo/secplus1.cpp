@@ -34,8 +34,8 @@ namespace ratgdo {
             }
             auto tx_cmd = this->pending_tx();
             if (
-                (millis() - this->last_tx_) > 1000 && // don't send twice in a period
-                (millis() - this->last_rx_) > 1000 && // time to send it
+                (millis() - this->last_tx_) > 400 && // don't send twice in a period
+                (millis() - this->last_rx_) > 200 && // time to send it
                 tx_cmd && // have pending command
                 !(this->is_0x37_panel_ && tx_cmd.value() == CommandType::TOGGLE_LOCK_PRESS) && this->wall_panel_emulation_state_ != WallPanelEmulationState::RUNNING) {
                 this->do_transmit_if_pending();
